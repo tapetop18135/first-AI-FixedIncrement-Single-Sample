@@ -30,13 +30,18 @@ class FixPerseptron:
 		while True:
 
 			interation += 1
-			print("interation is : ",interation)
+			print("\ninteration is : ",interation,"\n")
 			# select target each sample
-			if(self.input_X_all[i][1] == 0 and self.input_X_all[i][2] == 0):
-				use_target = self.target[0]
+			if(self.target == "or"):
+				if(self.input_X_all[i][1] == 0 and self.input_X_all[i][2] == 0):
+					use_target = -1
+				else:
+					use_target = 1
 			else:
-				use_target = self.target[1]
-
+				if(self.input_X_all[i][1] == 1 and self.input_X_all[i][2] == 1):
+					use_target = 1
+				else:
+					use_target = -1
 
 			# check Err
 			if(self.fixcheckErr(self.weight,use_target,self.input_X_all[i])):
@@ -97,8 +102,10 @@ input_all = [[0,0],
 			 [0,1],
 			 [1,0],
 			 [1,1]]
-target = [-1,1]
+target = "or"
+
 weight = [0,0,0]
+# weight = [2.5,0,0]
 
 
 sample = FixPerseptron(input_all,target,weight)
